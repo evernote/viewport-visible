@@ -1,0 +1,22 @@
+{
+  "name": "in-viewport",
+  "version": "0.0.0",
+  "description": "A light-weight module that allows you to pass in elements and return whether or not they are visible within the immediate viewport.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evernote/in-viewport"
+  },
+  "keywords": [
+    "viewport",
+    "element",
+    "DOM",
+    "visible",
+    "nonvisible"
+  ],
+  "author": "Augustus Yuan <hello@augustusyuan.com>",
+  "license": "MIT"
+}
