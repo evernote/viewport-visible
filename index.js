@@ -30,11 +30,20 @@ module.exports = function inViewport(options){
     var viewportWidth   = window.innerWidth || document.documentElement.clientWidth;
     var viewportHeight  = window.innerHeight || document.documentElement.clientHeight;
 
-    var evalTop     = rect.top >= 0 && rect.top <= viewportHeight - elPercentageHeight;
-    var evalLeft    = rect.left >= 0 && rect.left <= viewportWidth - elPercentageWidth;
-    var evalRight   = rect.right <= viewportWidth && rect.right >= 0 + elPercentageWidth;
-    var evalBottom  = rect.bottom <= viewportHeight && rect.bottom >= 0 + elPercentageHeight;
-    
+    var bound = {
+      top: viewportHeight >= elPercentageHeight ? viewportHeight - elPercentageHeight : viewportHeight,
+      bottom: viewportHeight >= elPercentageHeight ? 0 + elPercentageHeight : 0,
+      left : viewportWidth >= elPercentageWidth ? viewportWidth - elPercentageWidth : viewportWidth,
+      right: viewportWidth >= elPercentageHeight ? 0 + elPercentageWidth : 0
+    };
+
+    var eval = {
+      top : Math.abs(rect.top) <= 0 + elPercentageHeight && rect.top <= bound.top,
+      bottom : rect.bottom <= viewportHeight && rect.bottom >= bound.bottom,
+      left : Math.abs(rect.left) <= 0 + elPercentageWidth && rect.left <= bound.left,
+      right : rect.right <= viewportWidth && rect.right >= bound.right
+    }
+
     if (options.debug) {
       console.log('rect');
       console.log(rect);
@@ -42,25 +51,25 @@ module.exports = function inViewport(options){
       console.log('VPH: ' + viewportHeight);
       console.log('%H: ' + elPercentageHeight);
       console.log('%W: ' + elPercentageWidth);
-      console.log('evalTop: ' + evalTop);
-      console.log('evalLeft: ' + evalLeft);
-      console.log('evalRight: ' + evalRight);
-      console.log('evalBottom: ' + evalBottom);
+      console.log('bounds');
+      console.log(bound);
+      console.log('eval');
+      console.log(eval);
       console.log('');
-      console.log('result: ' + ((evalTop && evalLeft) || (evalTop && evalRight) || (evalBottom && evalLeft) || (evalBottom && evalRight)));
+      console.log('result: ' + ((eval.top && eval.left) || (eval.top && eval.right) || (eval.bottom && eval.left) || (eval.bottom && eval.right)));
     }
 
     // if the element is within the viewport 
     // by definition we say if the top, left, and right are within the viewport or the bottom left and right are in the viewport
     if (options.axis === 'y') {
-      return (evalTop || evalBottom);
+      return (eval.top || eval.bottom);
     } else if (options.axis === 'x') {
-      return (evalLeft || evalRight);
+      return (eval.left || eval.right);
     } 
 
     //if both, check all axes, we want it to be able to detect seeing the element from any corner
     return (
-      (evalTop && evalLeft) || (evalTop && evalRight) || (evalBottom && evalLeft) || (evalBottom && evalRight)
+      (eval.top && eval.left) || (eval.top && eval.right) || (eval.bottom && eval.left) || (eval.bottom && eval.right)
     );
   }
 
