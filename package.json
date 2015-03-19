@@ -1,5 +1,5 @@
 {
-  "name": "in-viewport",
+  "name": "viewport-visible",
   "version": "0.0.0",
   "description": "A light-weight module that allows you to pass in elements and return whether or not they are visible within the immediate viewport.",
   "main": "index.js",

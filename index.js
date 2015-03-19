@@ -1,5 +1,4 @@
-
-// in-viewport
+// viewport-visible
 // @author Augustus Yuan, Augusta Hammock, Ryan Burgess
 
 module.exports = function inViewport(options){

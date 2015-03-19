@@ -1,12 +1,12 @@
-# in-viewport Module
+# viewport-visible Module
 A light-weight module that allows you to pass in elements and return whether or not they are visible within the immediate viewport.
 
 # Install
-    npm install in-viewport --save-dev
+    npm install viewport-visible --save-dev
 
 # Example Usage
 
-    vizObj = inViewport({
+    vizObj = require('viewport-visible({
           target    : $('.elements'),
           percent   : 50,
           axis      : 'y',
