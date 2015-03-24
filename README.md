@@ -1,4 +1,7 @@
 # viewport-visible Module
+
+[![npm version](https://badge.fury.io/js/viewport-visible.svg)](http://badge.fury.io/js/viewport-visible)
+
 A light-weight module that allows you to pass in elements and return whether or not they are visible within the immediate viewport.
 
 # Install
