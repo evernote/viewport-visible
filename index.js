@@ -36,7 +36,7 @@ module.exports = function inViewport(options){
       right: viewportWidth >= elPercentageHeight ? 0 + elPercentageWidth : 0
     };
 
-    var eval = {
+    var within = {
       top : Math.abs(rect.top) <= 0 + elPercentageHeight && rect.top <= bound.top,
       bottom : rect.bottom <= viewportHeight && rect.bottom >= bound.bottom,
       left : Math.abs(rect.left) <= 0 + elPercentageWidth && rect.left <= bound.left,
@@ -52,23 +52,23 @@ module.exports = function inViewport(options){
       console.log('%W: ' + elPercentageWidth);
       console.log('bounds');
       console.log(bound);
-      console.log('eval');
-      console.log(eval);
+      console.log('within');
+      console.log(within);
       console.log('');
-      console.log('result: ' + ((eval.top && eval.left) || (eval.top && eval.right) || (eval.bottom && eval.left) || (eval.bottom && eval.right)));
+      console.log('result: ' + ((within.top && within.left) || (within.top && within.right) || (within.bottom && within.left) || (within.bottom && within.right)));
     }
 
-    // if the element is within the viewport 
+    // if the element is within the viewport
     // by definition we say if the top, left, and right are within the viewport or the bottom left and right are in the viewport
     if (options.axis === 'y') {
-      return (eval.top || eval.bottom);
+      return (within.top || within.bottom);
     } else if (options.axis === 'x') {
-      return (eval.left || eval.right);
-    } 
+      return (within.left || within.right);
+    }
 
     //if both, check all axes, we want it to be able to detect seeing the element from any corner
     return (
-      (eval.top && eval.left) || (eval.top && eval.right) || (eval.bottom && eval.left) || (eval.bottom && eval.right)
+      (within.top && within.left) || (within.top && within.right) || (within.bottom && within.left) || (within.bottom && within.right)
     );
   }
 
