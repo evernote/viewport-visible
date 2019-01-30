@@ -1,7 +1,9 @@
-// viewport-visible
-// @author Augustus Yuan, Augusta Hammock, Ryan Burgess
+/*
+ * viewport-visible
+ * @author Augustus Yuan, Augusta Hammock, Ryan Burgess
+ */
 
-module.exports = function inViewport(options){
+module.exports = function inViewport(options) {
 
   // if percent not specified, default to 50% of the element
   if (typeof options.percent === 'undefined') {
@@ -15,11 +17,9 @@ module.exports = function inViewport(options){
 
   // Test whether or not the element is in the viewport
   function visible(el, per) {
-
-    if (typeof jQuery === 'function' && el instanceof jQuery) {
-      el = el[0];
+    if (!el.getBoundingClientRect) {
+      throw new Error('Invalid element: please supply only valid elements that support client rects.');
     }
-
     var rect = el.getBoundingClientRect();
 
     // amount of px viewport needs to see to fire the event
@@ -76,19 +76,20 @@ module.exports = function inViewport(options){
   var visibleArray = [];
   var nonvisibleArray = [];
   if (options.target.length > 1) {
-    $.each(options.target, function(i, t) {
-      if (visible($(t), options.percent)) {
-        visibleArray.push($(t));
+    var list = Array.from(options.target);
+    list.forEach(function(element, i) {
+      if (visible(element, options.percent)) {
+        visibleArray.push(element);
       } else {
-        nonvisibleArray.push($(t));
+        nonvisibleArray.push(element);
       }
       all.push({
-        el : $(t),
-        visible : visible($(t), options.percent)
+        el : element,
+        visible : visible(element, options.percent)
       });
     });
   } else {
-    return (visible($(options.target), options.percent));
+    return visible(options.target, options.percent);
   }
 
   if (options.debug) {

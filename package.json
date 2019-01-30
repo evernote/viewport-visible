@@ -1,6 +1,6 @@
 {
   "name": "viewport-visible",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A light-weight module that allows you to pass in elements and return whether or not they are visible within the immediate viewport.",
   "main": "index.js",
   "scripts": {
@@ -17,14 +17,13 @@
     "visible",
     "nonvisible"
   ],
-  "author": "Augusta Hammock <ahammock@evernote.com>",
+  "author": "Augustus Yuan <ayuan@evernote.com>",
   "contributors": [{
-      "name": "Augustus Yuan",
-      "email": "ayuan@evernote.com"
-    },
-    {
-      "name": "Ryan Burgess",
-      "email": "rburgess@evernote.com"
-    }],
+    "name": "Ryan Burgess",
+    "email": "rburgess@evernote.com"
+  }, {
+    "name": "Augusta Hammock",
+    "email": "ahammock@evernote.com"
+  }],
   "license": "MIT"
 }
